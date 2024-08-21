@@ -1,3 +1,5 @@
+/* styles.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
@@ -17,7 +19,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-image: url('escuridão.jpg'); 
+    background-image: url('escuridão.jpg'); /* Substitua pelo caminho da sua imagem */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -31,7 +33,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     position: relative;
-    background-image: url('visao.jpg'); 
+    background-image: url('visao.jpg'); /* Substitua pelo caminho da sua imagem */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -63,23 +65,27 @@ button:hover {
     margin-bottom: 20px;
 }
 
+.caixa-perguntas,
+.caixa-alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px auto;
+}
+
 .caixa-historia {
+    margin-top: 20px;
+}
+
+.caixa-resultado {
     display: none;
     margin-top: 20px;
 }
 
-.caixa-historia .texto-historia {
-    margin-bottom: 10px;
-}
-
-.caixa-perguntas,
-.caixa-alternativas,
-.caixa-resultado {
-    display: none;
-}
-
-.caixa-perguntas.mostrar,
-.caixa-alternativas.mostrar,
 .caixa-resultado.mostrar {
+    display: block;
+}
+
+.continuar-btn {
     display: block;
 }

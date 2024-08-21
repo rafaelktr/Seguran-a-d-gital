@@ -1,3 +1,5 @@
+// main.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const perguntas = [
         {
@@ -5,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
             alternativas: [
                 {
                     texto: "Procura um abrigo.",
-                    historia: "Você encontra um abrigo seguro e continua sua jornada.",
+                    historia: "Você encontra um abrigo seguro e continua sua jornada. À medida que explora, encontra uma caverna. O que faz?",
                     proxima: 1,
                 },
                 {
                     texto: "Continua andando.",
-                    historia: "Você se sente cada vez mais perdido na floresta.",
+                    historia: "Você se sente cada vez mais perdido na floresta. Encontra um caminho dividido. Para onde vai?",
                     proxima: 2,
                 },
             ]
@@ -20,62 +22,51 @@ document.addEventListener('DOMContentLoaded', () => {
             alternativas: [
                 {
                     texto: "Entra na caverna.",
-                    historia: "Quando você entra na caverna, percebe algo no canto escuro, você não sabe o que é. Você decide explorar ou sair.",
+                    historia: "Dentro da caverna, você encontra uma figura sombria no canto escuro. Você decide:",
                     proxima: 3,
                 },
                 {
                     texto: "Ignora a caverna.",
-                    historia: "Você continua andando e se perde ainda mais na floresta.",
+                    historia: "Você continua se perdendo na floresta e encontra uma clareira. O que faz?",
                     proxima: 4,
                 },
             ]
         },
-        // Adicione as outras perguntas e histórias intermediárias aqui
+        // ... mais perguntas e alternativas
     ];
 
     const caixaPerguntas = document.querySelector(".caixa-perguntas");
     const caixaAlternativas = document.querySelector(".caixa-alternativas");
+    const caixaHistoria = document.querySelector(".caixa-historia");
+    const textoHistoria = document.querySelector(".texto-historia");
+    const botaoContinuar = document.querySelector(".continuar-btn");
     const caixaResultado = document.querySelector(".caixa-resultado");
     const textoResultado = document.querySelector(".texto-resultado");
     const botaoJogarNovamente = document.querySelector(".novamente-btn");
     const botaoIniciar = document.querySelector(".iniciar-btn");
     const telaInicial = document.querySelector(".tela-inicial");
-    const caixaHistoria = document.querySelector(".caixa-historia");
-    const textoHistoria = document.querySelector(".texto-historia");
-    const botaoContinuar = document.querySelector(".continuar-btn");
 
     let atual = 0;
     let historiaFinal = "";
-    let proximaPergunta = null;
 
-    // Iniciar o jogo
     botaoIniciar.addEventListener('click', iniciaJogo);
-    // Continuar após uma história intermediária
-    botaoContinuar.addEventListener('click', () => {
-        if (proximaPergunta !== null) {
-            atual = proximaPergunta;
-            proximaPergunta = null;
-            caixaHistoria.style.display = 'none';
-            caixaPerguntas.classList.add("mostrar");
-            caixaAlternativas.classList.add("mostrar");
-            mostraPergunta();
-        }
-    });
-    // Jogar novamente
-    botaoJogarNovamente.addEventListener("click", jogaNovamente);
+    botaoContinuar.addEventListener('click', mostraPergunta);
 
     function iniciaJogo() {
         atual = 0;
         historiaFinal = "";
         telaInicial.style.display = 'none';
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-        caixaResultado.classList.remove("mostrar");
+        caixaPerguntas.style.display = 'none';
+        caixaAlternativas.style.display = 'none';
         caixaHistoria.style.display = 'none';
+        caixaResultado.classList.remove("mostrar");
         mostraPergunta();
     }
 
     function mostraPergunta() {
+        caixaHistoria.style.display = 'none';
+        caixaPerguntas.style.display = 'block';
+        caixaAlternativas.style.display = 'block';
         if (atual >= perguntas.length) {
             mostraResultado();
             return;
@@ -88,44 +79,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function mostraAlternativas(pergunta) {
         for (const alternativa of pergunta.alternativas) {
-            const botaoAlternativas = document.createElement("button");
-            botaoAlternativas.textContent = alternativa.texto;
-            botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
-            caixaAlternativas.appendChild(botaoAlternativas);
+            const botaoAlternativa = document.createElement("button");
+            botaoAlternativa.textContent = alternativa.texto;
+            botaoAlternativa.addEventListener("click", () => respostaSelecionada(alternativa));
+            caixaAlternativas.appendChild(botaoAlternativa);
         }
-        caixaPerguntas.classList.add("mostrar");
-        caixaAlternativas.classList.add("mostrar");
     }
 
     function respostaSelecionada(opcaoSelecionada) {
         historiaFinal += opcaoSelecionada.historia + " ";
+        caixaPerguntas.style.display = 'none';
+        caixaAlternativas.style.display = 'none';
+        caixaHistoria.style.display = 'block';
+        textoHistoria.textContent = opcaoSelecionada.historia;
+        botaoContinuar.style.display = 'block';
         if (opcaoSelecionada.proxima === 'end-win') {
             mostraResultado("Você conseguiu voltar para casa!");
         } else if (opcaoSelecionada.proxima === 'end-lose') {
             mostraResultado("Você se perdeu na floresta.");
         } else {
-            proximaPergunta = opcaoSelecionada.proxima;
-            caixaPerguntas.classList.remove("mostrar");
-            caixaAlternativas.classList.remove("mostrar");
-            caixaHistoria.style.display = 'block';
-            textoHistoria.textContent = opcaoSelecionada.historia;
+            atual = opcaoSelecionada.proxima;
         }
     }
 
     function mostraResultado(mensagem) {
-        caixaPerguntas.textContent = mensagem;
-        textoResultado.textContent = historiaFinal;
-        caixaResultado.classList.add("mostrar");
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
+        caixaPerguntas.style.display = 'none';
+        caixaAlternativas.style.display = 'none';
         caixaHistoria.style.display = 'none';
+        textoResultado.textContent = historiaFinal + " " + mensagem;
+        caixaResultado.classList.add("mostrar");
+        botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
 
     function jogaNovamente() {
         atual = 0;
         historiaFinal = "";
         caixaResultado.classList.remove("mostrar");
-        telaInicial.style.display = 'block';
-    }
-});
- 
+       
