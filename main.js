@@ -334,6 +334,47 @@ document.addEventListener('DOMContentLoaded', () => {
     function mostraAlternativas(pergunta) {
         for (const alternativa of pergunta.alternativas) {
             const botaoAlternativa = document.createElement("button");
-            botaoAlternativa.textContent = alternativa
+            botaoAlternativa.textContent = alternativa.texto;
+            botaoAlternativa.addEventListener("click", () => respostaSelecionada(alternativa));
+            caixaAlternativas.appendChild(botaoAlternativa);
         }
     }
+
+    function respostaSelecionada(opcaoSelecionada) {
+        historiaFinal += opcaoSelecionada.historia + " ";
+        caixaPerguntas.classList.remove("mostrar");
+        caixaAlternativas.classList.remove("mostrar");
+        caixaHistoria.style.display = 'block';
+        textoHistoria.textContent = opcaoSelecionada.historia;
+        botaoContinuar.style.display = 'block'; // Mostra o botão "continuar" após a resposta
+
+        // Remove o listener antigo para evitar múltiplos eventos
+        botaoContinuar.removeEventListener("click", continuaPergunta);
+        // Adiciona um novo listener com o contexto correto
+        botaoContinuar.addEventListener("click", () => continuaPergunta(opcaoSelecionada));
+    }
+
+    function continuaPergunta(opcaoSelecionada) {
+        if (opcaoSelecionada.proxima === 'end-win' || opcaoSelecionada.proxima === 'end-lose') {
+            mostraResultado();
+        } else {
+            atual = opcaoSelecionada.proxima;
+            caixaHistoria.style.display = 'none';
+            botaoContinuar.style.display = 'none'; // Esconde o botão "continuar" após continuar para a próxima pergunta
+            mostraPergunta();
+        }
+    }
+
+    function mostraResultado() {
+        caixaPerguntas.classList.remove("mostrar");
+        caixaAlternativas.classList.remove("mostrar");
+        caixaHistoria.style.display = 'none';
+        caixaResultado.classList.add("mostrar");
+        textoResultado.textContent = historiaFinal.includes('ponte') ? "Você atravessou a ponte e voltou para casa!" : "Você se perdeu na floresta.";
+    }
+
+    botaoJogarNovamente.addEventListener('click', () => {
+        caixaResultado.classList.remove("mostrar");
+        telaInicial.style.display = 'block';
+    });
+});
