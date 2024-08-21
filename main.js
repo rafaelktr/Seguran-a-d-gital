@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const perguntaAtual = perguntas[atual];
         caixaPerguntas.textContent = perguntaAtual.enunciado;
-        caixaAlternativas.innerHTML = ''; // Limpa alternativas anteriores
+        caixaAlternativas.innerHTML = '';
         mostraAlternativas(perguntaAtual);
     }
 
@@ -105,19 +105,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function mostraResultado(mensagem) {
-        caixaPerguntas.textContent = mensagem; // Mensagem final
-        textoResultado.textContent = historiaFinal; // História final
-        caixaAlternativas.innerHTML = ''; // Remove alternativas
-        caixaPerguntas.classList.remove("mostrar"); // Oculta perguntas
-        caixaAlternativas.classList.remove("mostrar"); // Oculta alternativas
-        caixaResultado.classList.add("mostrar"); // Exibe resultado
+        // Limpar as perguntas e alternativas
+        caixaPerguntas.textContent = '';
+        caixaAlternativas.innerHTML = '';
+
+        // Exibir mensagem final
+        caixaPerguntas.textContent = mensagem;
+        textoResultado.textContent = historiaFinal;
+
+        caixaResultado.classList.add("mostrar");
         botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
 
     function jogaNovamente() {
         atual = 0;
         historiaFinal = "";
-        caixaResultado.classList.remove("mostrar"); // Oculta resultado
-        telaInicial.style.display = 'block'; // Mostra tela inicial
+        caixaResultado.classList.remove("mostrar");
+        telaInicial.style.display = 'block';
     }
 });
