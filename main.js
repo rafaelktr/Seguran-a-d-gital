@@ -1,60 +1,122 @@
 // script.js
 
-const questions = [
+const perguntas = [
     {
-        question: "Você está perdido na floresta. O que você faz?",
-        choices: [
-            { text: "Procura um abrigo.", next: 1 },
-            { text: "Continua andando.", next: 2 }
+        enunciado: "Você está na floresta. O que faz?",
+        alternativas: [
+            {
+                texto: "Procura um abrigo.",
+                afirmacao: "Você encontra um abrigo seguro e continua sua jornada.",
+                proxima: 1,
+            },
+            {
+                texto: "Continua andando.",
+                afirmacao: "Você se sente cada vez mais perdido na floresta.",
+                proxima: 2,
+            },
         ]
     },
     {
-        question: "Você encontra uma caverna. O que fazer?",
-        choices: [
-            { text: "Entra na caverna.", next: 3 },
-            { text: "Ignora a caverna e continua.", next: 4 }
+        enunciado: "Você encontra uma caverna. O que faz?",
+        alternativas: [
+            {
+                texto: "Entra na caverna.",
+                afirmacao: "Dentro da caverna, você encontra uma saída para a floresta.",
+                proxima: 3,
+            },
+            {
+                texto: "Ignora a caverna.",
+                afirmacao: "Você continua se perdendo na floresta.",
+                proxima: 4,
+            },
         ]
     },
     // Adicione mais perguntas aqui
     // ...
     {
-        question: "Você chega a uma ponte. O que faz?",
-        choices: [
-            { text: "Atravesse a ponte.", next: 'end-win' },
-            { text: "Volta para a floresta.", next: 'end-lose' }
+        enunciado: "Você chega a uma ponte. O que faz?",
+        alternativas: [
+            {
+                texto: "Atravesse a ponte.",
+                afirmacao: "Você atravessa a ponte e finalmente volta para casa!",
+                proxima: 'end-win',
+            },
+            {
+                texto: "Volta para a floresta.",
+                afirmacao: "Você se perde novamente na floresta.",
+                proxima: 'end-lose',
+            },
         ]
     }
 ];
 
-let currentQuestionIndex = 0;
+const caixaPerguntas = document.querySelector(".caixa-perguntas");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultado = document.querySelector(".caixa-resultado");
+const textoResultado = document.querySelector(".texto-resultado");
+const botaoJogarNovamente = document.querySelector(".novamente-btn");
+const botaoIniciar = document.querySelector(".iniciar-btn");
+const telaInicial = document.querySelector(".tela-inicial");
 
-function renderQuestion() {
-    const question = questions[currentQuestionIndex];
-    document.getElementById('question').innerText = question.question;
-    
-    const choicesContainer = document.getElementById('choices');
-    choicesContainer.innerHTML = '';
+let atual = 0;
+let historiaFinal = "";
 
-    question.choices.forEach(choice => {
-        const button = document.createElement('button');
-        button.className = 'choice';
-        button.innerText = choice.text;
-        button.onclick = () => handleChoice(choice.next);
-        choicesContainer.appendChild(button);
-    });
+botaoIniciar.addEventListener('click', iniciaJogo);
+
+function iniciaJogo() {
+    atual = 0;
+    historiaFinal = "";
+    telaInicial.style.display = 'none';
+    caixaPerguntas.classList.remove("mostrar");
+    caixaAlternativas.classList.remove("mostrar");
+    caixaResultado.classList.remove("mostrar");
+    mostraPergunta();
 }
 
-function handleChoice(next) {
-    if (next === 'end-win') {
-        document.getElementById('question').innerText = "Você conseguiu atravessar a ponte e está a salvo!";
-        document.getElementById('choices').innerHTML = '';
-    } else if (next === 'end-lose') {
-        document.getElementById('question').innerText = "Você se perdeu na floresta e nunca mais foi encontrado.";
-        document.getElementById('choices').innerHTML = '';
+function mostraPergunta() {
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
+    }
+    const perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.innerHTML = '';
+    mostraAlternativas(perguntaAtual);
+}
+
+function mostraAlternativas(pergunta) {
+    for (const alternativa of pergunta.alternativas) {
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+    caixaPerguntas.classList.add("mostrar");
+    caixaAlternativas.classList.add("mostrar");
+}
+
+function respostaSelecionada(opcaoSelecionada) {
+    historiaFinal += opcaoSelecionada.afirmacao + " ";
+    if (opcaoSelecionada.proxima === 'end-win') {
+        mostraResultado("Você conseguiu voltar para casa!");
+    } else if (opcaoSelecionada.proxima === 'end-lose') {
+        mostraResultado("Você se perdeu na floresta.");
     } else {
-        currentQuestionIndex = next;
-        renderQuestion();
+        atual = opcaoSelecionada.proxima;
+        mostraPergunta();
     }
 }
 
-document.addEventListener('DOMContentLoaded', renderQuestion);
+function mostraResultado(mensagem) {
+    caixaPerguntas.textContent = mensagem;
+    textoResultado.textContent = historiaFinal;
+    caixaResultado.classList.add("mostrar");
+    botaoJogarNovamente.addEventListener("click", jogaNovamente);
+}
+
+function jogaNovamente() {
+    atual = 0;
+    historiaFinal = "";
+    caixaResultado.classList.remove("mostrar");
+    telaInicial.style.display = 'block';
+}

@@ -1,53 +1,70 @@
 /* styles.css */
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('pe.jpg'); /* Imagem de fundo da página */
-    background-size: cover;
-    background-position: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-.game-container {
+:root {
+    --cor-fundo: #01080E;
+    --cor-principal: #0B0D20;
+    --cor-secundaria: #212333;
+    --cor-destaque: #2BDEFD;
+    --cor-texto: #D7F9FF;
+}
+  
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.content-box {
-    background-image: url('pe.jpg'); /* Imagem de fundo do retângulo */
-    background-size: cover;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-    width: 80%;
+.caixa-principal {
+    background-color: var(--cor-principal);
+    width: 90%;
     max-width: 600px;
     text-align: center;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-#question {
-    font-size: 1.5em;
+h1 {
+    color: var(--cor-destaque);
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    transition: background-color 0.3s;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: var(--cor-destaque);
+    color: var(--cor-principal);
+}
+
+.tela-inicial {
     margin-bottom: 20px;
 }
 
-.choice {
+.caixa-resultado {
+    display: none;
+}
+
+.caixa-resultado.mostrar {
     display: block;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
 }
 
-.choice:hover {
-    background-color: #45a049;
-}
-
-.choice:active {
-    background-color: #388e3c;
+.caixa-alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
