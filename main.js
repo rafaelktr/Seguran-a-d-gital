@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alternativas: [
                 {
                     texto: "Entra na caverna.",
-                    afirmacao: "Dentro da caverna, você encontra uma saída para a floresta.",
+                    afirmacao: "Dentro da caverna, você não encontra uma saída para a floresta.",
                     proxima: 3,
                 },
                 {
