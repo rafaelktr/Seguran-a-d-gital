@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const caixaPerguntas = document.querySelector(".caixa-perguntas");
     const caixaAlternativas = document.querySelector(".caixa-alternativas");
-    const caixaResultado = document.querySelector(".caixa-resultado");
+    const caixaResultadoBom = document.querySelector(".caixa-resultado-bom");
+    const caixaResultadoRuim = document.querySelector(".caixa-resultado-ruim");
     const textoResultado = document.querySelector(".texto-resultado");
     const botaoJogarNovamente = document.querySelector(".novamente-btn");
     const botaoIniciar = document.querySelector(".iniciar-btn");
@@ -57,33 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let atual = 0;
     let historiaFinal = "";
-    let jogoIniciado = false;
 
     botaoIniciar.addEventListener('click', iniciaJogo);
 
     function iniciaJogo() {
         atual = 0;
         historiaFinal = "";
-        jogoIniciado = true; // Marcar que o jogo foi iniciado
         telaInicial.style.display = 'none';
         caixaPerguntas.classList.remove("mostrar");
         caixaAlternativas.classList.remove("mostrar");
-        caixaResultado.classList.remove("mostrar");
-        caixaPerguntas.textContent = ""; // Limpar o texto da pergunta
-        caixaAlternativas.innerHTML = ""; // Limpar alternativas anteriores
+        caixaResultadoBom.classList.remove("mostrar");
+        caixaResultadoRuim.classList.remove("mostrar");
         mostraPergunta();
     }
 
     function mostraPergunta() {
-        if (!jogoIniciado) return; // Verificar se o jogo foi iniciado
-
         if (atual >= perguntas.length) {
-            mostraResultado("Você chegou ao fim da jornada.");
+            mostraResultado();
             return;
         }
         const perguntaAtual = perguntas[atual];
         caixaPerguntas.textContent = perguntaAtual.enunciado;
-        caixaAlternativas.innerHTML = ''; // Limpar alternativas antigas
+        caixaAlternativas.innerHTML = '';
         mostraAlternativas(perguntaAtual);
     }
 
@@ -101,35 +97,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function respostaSelecionada(opcaoSelecionada) {
         historiaFinal += opcaoSelecionada.afirmacao + " ";
         if (opcaoSelecionada.proxima === 'end-win') {
-            mostraResultado("Você conseguiu voltar para casa!");
+            mostraResultado("Você conseguiu voltar para casa!", "bom");
         } else if (opcaoSelecionada.proxima === 'end-lose') {
-            mostraResultado("Você se perdeu na floresta.");
+            mostraResultado("Você se perdeu na floresta.", "ruim");
         } else {
             atual = opcaoSelecionada.proxima;
             mostraPergunta();
         }
     }
 
-    function mostraResultado(mensagem) {
+    function mostraResultado(mensagem, tipo) {
         caixaPerguntas.textContent = mensagem;
         textoResultado.textContent = historiaFinal;
-        caixaResultado.classList.add("mostrar");
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-        // Remover event listener anterior para evitar múltiplos listeners
-        botaoJogarNovamente.removeEventListener("click", jogaNovamente);
+        if (tipo === "bom") {
+            caixaResultadoBom.classList.add("mostrar");
+        } else if (tipo === "ruim") {
+            caixaResultadoRuim.classList.add("mostrar");
+        }
         botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
 
     function jogaNovamente() {
         atual = 0;
         historiaFinal = "";
-        caixaResultado.classList.remove("mostrar");
+        caixaResultadoBom.classList.remove("mostrar");
+        caixaResultadoRuim.classList.remove("mostrar");
         telaInicial.style.display = 'block';
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-        caixaPerguntas.textContent = ""; // Limpar o texto da pergunta
-        caixaAlternativas.innerHTML = ""; // Limpar alternativas anteriores
-        jogoIniciado = false; // Marcar que o jogo não foi iniciado
     }
 });
