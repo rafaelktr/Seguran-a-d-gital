@@ -20,27 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
             alternativas: [
                 {
                     texto: "Entra na caverna.",
-                    afirmacao: "Dentro da caverna, você percebe algo no canto escuro. Você vai explorar ou sair da caverna?",
+                    afirmacao: "Dentro da caverna, você não encontra uma saída para a floresta.",
                     proxima: 3,
                 },
                 {
                     texto: "Ignora a caverna.",
                     afirmacao: "Você continua se perdendo na floresta.",
-                    proxima: 4,
-                },
-            ]
-        },
-        {
-            enunciado: "Você entra na caverna e vê algo no canto escuro. O que faz?",
-            alternativas: [
-                {
-                    texto: "Explora o canto escuro.",
-                    afirmacao: "Você encontra uma saída secreta da caverna e continua sua jornada.",
-                    proxima: 5,
-                },
-                {
-                    texto: "Sai da caverna.",
-                    afirmacao: "Você retorna para a floresta.",
                     proxima: 4,
                 },
             ]
@@ -59,8 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     proxima: 'end-lose',
                 },
             ]
-        },
-        // Adicione mais perguntas aqui, mantendo a lógica de progressão
+        }
     ];
 
     const caixaPerguntas = document.querySelector(".caixa-perguntas");
@@ -69,15 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const textoResultado = document.querySelector(".texto-resultado");
     const botaoJogarNovamente = document.querySelector(".novamente-btn");
     const botaoIniciar = document.querySelector(".iniciar-btn");
-    const botaoContinue = document.querySelector(".continue-btn");
     const telaInicial = document.querySelector(".tela-inicial");
 
     let atual = 0;
     let historiaFinal = "";
 
     botaoIniciar.addEventListener('click', iniciaJogo);
-    botaoContinue.addEventListener('click', continuaJogo);
-    botaoJogarNovamente.addEventListener('click', jogaNovamente);
 
     function iniciaJogo() {
         atual = 0;
@@ -87,11 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         caixaAlternativas.classList.remove("mostrar");
         caixaResultado.classList.remove("mostrar");
         mostraPergunta();
-    }
-
-    function continuaJogo() {
-        mostraPergunta();
-        caixaResultado.classList.remove("mostrar");
     }
 
     function mostraPergunta() {
@@ -124,17 +100,21 @@ document.addEventListener('DOMContentLoaded', () => {
             mostraResultado("Você se perdeu na floresta.");
         } else {
             atual = opcaoSelecionada.proxima;
-            caixaPerguntas.textContent = opcaoSelecionada.afirmacao;
-            caixaAlternativas.innerHTML = '';
-            caixaResultado.classList.add("mostrar");
+            mostraPergunta();
         }
     }
 
     function mostraResultado(mensagem) {
-        textoResultado.textContent = mensagem;
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
+        // Limpar as perguntas e alternativas
+        caixaPerguntas.textContent = '';
+        caixaAlternativas.innerHTML = '';
+
+        // Exibir mensagem final
+        caixaPerguntas.textContent = mensagem;
+        textoResultado.textContent = historiaFinal;
+
         caixaResultado.classList.add("mostrar");
+        botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
 
     function jogaNovamente() {
