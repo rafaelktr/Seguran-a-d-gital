@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de Terror</title>
+    <title>Jogo de Perguntas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="caixa-principal">
-        <h1>Você está perdido na floresta</h1>
-        <div class="tela-inicial">
-            <p>Você é uma criança perdida em uma floresta escura e assustadora. Seu objetivo é encontrar uma ponte para voltar para casa, mas há perigos pelo caminho. Faça as escolhas certas para sobreviver e encontrar seu caminho de volta.</p>
-            <button class="iniciar-btn">Iniciar</button>
-        </div>
-        <div class="caixa-perguntas"></div>
-        <div class="caixa-alternativas"></div>
-        <div class="caixa-historia">
-            <p class="texto-historia"></p>
-            <button class="continuar-btn" style="display: none;">Continuar</button>
-        </div>
-        <div class="caixa-resultado">
-            <p class="texto-resultado"></p>
-            <button class="novamente-btn">Jogar novamente</button>
+    <div id="game">
+        <button id="start-btn">Iniciar</button>
+        <div id="question-container" class="hidden">
+            <p id="question-text"></p>
+            <div id="alternatives-container"></div>
+            <button id="continue-btn" class="hidden">Continuar</button>
         </div>
     </div>
-    <script src="main.js" type="module"></script>
+    <script src="main.js"></script>
 </body>
 </html>
