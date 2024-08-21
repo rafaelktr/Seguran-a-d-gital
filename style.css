@@ -28,6 +28,7 @@ body {
     text-align: center;
     padding: 20px;
     border-radius: 10px;
+    position: relative;
 }
 
 h1 {
@@ -44,6 +45,7 @@ button {
     transition: background-color 0.3s;
     font-family: 'Chakra Petch', sans-serif;
     font-size: 1em;
+    cursor: pointer;
 }
 
 button:hover {
@@ -55,16 +57,19 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.caixa-resultado {
-    display: none;
-}
-
-.caixa-resultado.mostrar {
-    display: block;
-}
-
+.caixa-perguntas,
 .caixa-alternativas {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin: 20px auto;
+}
+
+.caixa-resultado {
+    display: none;
+    margin-top: 20px;
+}
+
+.caixa-resultado.mostrar {
+    display: block;
 }
