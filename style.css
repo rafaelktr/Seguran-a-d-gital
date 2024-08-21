@@ -63,14 +63,6 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.caixa-perguntas,
-.caixa-alternativas {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px auto;
-}
-
 .caixa-historia {
     display: none;
     margin-top: 20px;
@@ -80,12 +72,14 @@ button:hover {
     margin-bottom: 10px;
 }
 
+.caixa-perguntas,
+.caixa-alternativas,
 .caixa-resultado {
     display: none;
-    margin-top: 20px;
 }
 
+.caixa-perguntas.mostrar,
+.caixa-alternativas.mostrar,
 .caixa-resultado.mostrar {
     display: block;
 }
-

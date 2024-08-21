@@ -48,15 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let historiaFinal = "";
     let proximaPergunta = null;
 
+    // Iniciar o jogo
     botaoIniciar.addEventListener('click', iniciaJogo);
+    // Continuar após uma história intermediária
     botaoContinuar.addEventListener('click', () => {
         if (proximaPergunta !== null) {
             atual = proximaPergunta;
             proximaPergunta = null;
             caixaHistoria.style.display = 'none';
+            caixaPerguntas.classList.add("mostrar");
+            caixaAlternativas.classList.add("mostrar");
             mostraPergunta();
         }
     });
+    // Jogar novamente
+    botaoJogarNovamente.addEventListener("click", jogaNovamente);
 
     function iniciaJogo() {
         atual = 0;
@@ -110,7 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
         caixaPerguntas.textContent = mensagem;
         textoResultado.textContent = historiaFinal;
         caixaResultado.classList.add("mostrar");
-        botaoJogarNovamente.addEventListener("click", jogaNovamente);
+        caixaPerguntas.classList.remove("mostrar");
+        caixaAlternativas.classList.remove("mostrar");
+        caixaHistoria.style.display = 'none';
     }
 
     function jogaNovamente() {
