@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: url('background.jpg'); /* Imagem de fundo da página */
+    background-image: url('pe.jpg'); /* Imagem de fundo da página */
     background-size: cover;
     background-position: center;
 }
@@ -17,7 +17,7 @@ body {
 }
 
 .content-box {
-    background-image: url('content-background.png'); /* Imagem de fundo do retângulo */
+    background-image: url('pe.jpg'); /* Imagem de fundo do retângulo */
     background-size: cover;
     padding: 20px;
     border-radius: 10px;
