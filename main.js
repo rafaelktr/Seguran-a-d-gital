@@ -1,122 +1,89 @@
 // script.js
 
-document.addEventListener('DOMContentLoaded', () => {
-    const perguntas = [
-        {
-            enunciado: "Você está na floresta. O que faz?",
-            alternativas: [
-                {
-                    texto: "Procura um abrigo.",
-                    afirmacao: "Você encontra um abrigo seguro e continua sua jornada.",
-                    proxima: 1,
-                },
-                {
-                    texto: "Continua andando.",
-                    afirmacao: "Você se sente cada vez mais perdido na floresta.",
-                    proxima: 2,
-                },
-            ]
-        },
-        {
-            enunciado: "Você encontra uma caverna. O que faz?",
-            alternativas: [
-                {
-                    texto: "Entra na caverna.",
-                    afirmacao: "Dentro da caverna, você encontra uma saída para a floresta.",
-                    proxima: 3,
-                },
-                {
-                    texto: "Ignora a caverna.",
-                    afirmacao: "Você continua se perdendo na floresta.",
-                    proxima: 4,
-                },
-            ]
-        },
-        {
-            enunciado: "Você chega a uma ponte. O que faz?",
-            alternativas: [
-                {
-                    texto: "Atravesse a ponte.",
-                    afirmacao: "Você atravessa a ponte e finalmente volta para casa!",
-                    proxima: 'end-win',
-                },
-                {
-                    texto: "Volta para a floresta.",
-                    afirmacao: "Você se perde novamente na floresta.",
-                    proxima: 'end-lose',
-                },
-            ]
-        }
-    ];
+import { aleatorio, nome } from './aleatorio.js';
+import { perguntas } from './perguntas.js';
 
-    const caixaPerguntas = document.querySelector(".caixa-perguntas");
-    const caixaAlternativas = document.querySelector(".caixa-alternativas");
-    const caixaResultado = document.querySelector(".caixa-resultado");
-    const textoResultado = document.querySelector(".texto-resultado");
-    const botaoJogarNovamente = document.querySelector(".novamente-btn");
-    const botaoIniciar = document.querySelector(".iniciar-btn");
-    const telaInicial = document.querySelector(".tela-inicial");
+const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixaPerguntas = document.querySelector(".caixa-perguntas");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultado = document.querySelector(".caixa-resultado");
+const textoResultado = document.querySelector(".texto-resultado");
+const botaoJogarNovamente = document.querySelector(".novamente-btn");
+const botaoIniciar = document.querySelector(".iniciar-btn");
+const telaInicial = document.querySelector(".tela-inicial");
 
-    let atual = 0;
-    let historiaFinal = "";
+let atual = 0;
+let perguntaAtual;
+let historiaFinal = "";
 
-    botaoIniciar.addEventListener('click', iniciaJogo);
+botaoIniciar.addEventListener('click', iniciaJogo);
+botaoJogarNovamente.addEventListener('click', jogaNovamente);
 
-    function iniciaJogo() {
-        atual = 0;
-        historiaFinal = "";
-        telaInicial.style.display = 'none';
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-        caixaResultado.classList.remove("mostrar");
+function iniciaJogo() {
+    atual = 0;
+    historiaFinal = "";
+    telaInicial.style.display = 'none';
+    caixaResultado.classList.remove("mostrar");
+    caixaPerguntas.classList.add("mostrar");
+    caixaAlternativas.classList.add("mostrar");
+    mostraPergunta();
+}
+
+function mostraPergunta() {
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
+    }
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+}
+
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacoes = aleatorio(opcaoSelecionada.afirmacao);
+    historiaFinal += afirmacoes + " ";
+    if (opcaoSelecionada.proxima !== undefined) {
+        atual = opcaoSelecionada.proxima;
         mostraPergunta();
+    } else {
+        mostraResultado();
     }
+}
 
-    function mostraPergunta() {
-        if (atual >= perguntas.length) {
-            mostraResultado();
-            return;
-        }
-        const perguntaAtual = perguntas[atual];
-        caixaPerguntas.textContent = perguntaAtual.enunciado;
-        caixaAlternativas.innerHTML = '';
-        mostraAlternativas(perguntaAtual);
-    }
+function mostraResultado() {
+    caixaPerguntas.textContent = `Em 2049, ${nome}`;
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
+    caixaResultado.classList.add("mostrar");
 
-    function mostraAlternativas(pergunta) {
-        for (const alternativa of pergunta.alternativas) {
-            const botaoAlternativas = document.createElement("button");
-            botaoAlternativas.textContent = alternativa.texto;
-            botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
-            caixaAlternativas.appendChild(botaoAlternativas);
-        }
-        caixaPerguntas.classList.add("mostrar");
-        caixaAlternativas.classList.add("mostrar");
-    }
+    // Oculta as perguntas e alternativas
+    caixaPerguntas.classList.remove("mostrar");
+    caixaAlternativas.classList.remove("mostrar");
+}
 
-    function respostaSelecionada(opcaoSelecionada) {
-        historiaFinal += opcaoSelecionada.afirmacao + " ";
-        if (opcaoSelecionada.proxima === 'end-win') {
-            mostraResultado("Você conseguiu voltar para casa!");
-        } else if (opcaoSelecionada.proxima === 'end-lose') {
-            mostraResultado("Você se perdeu na floresta.");
-        } else {
-            atual = opcaoSelecionada.proxima;
-            mostraPergunta();
-        }
-    }
+function jogaNovamente() {
+    atual = 0;
+    historiaFinal = "";
+    caixaResultado.classList.remove("mostrar");
+    telaInicial.style.display = 'block'; // Mostra a tela inicial novamente
+    caixaPerguntas.classList.remove("mostrar");
+    caixaAlternativas.classList.remove("mostrar");
+}
 
-    function mostraResultado(mensagem) {
-        caixaPerguntas.textContent = mensagem;
-        textoResultado.textContent = historiaFinal;
-        caixaResultado.classList.add("mostrar");
-        botaoJogarNovamente.addEventListener("click", jogaNovamente);
+function substituiNome() {
+    for (const pergunta of perguntas) {
+        pergunta.enunciado = pergunta.enunciado.replace(/você/g, nome);
     }
+}
 
-    function jogaNovamente() {
-        atual = 0;
-        historiaFinal = "";
-        caixaResultado.classList.remove("mostrar");
-        telaInicial.style.display = 'block';
-    }
-});
+substituiNome();
