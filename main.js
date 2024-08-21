@@ -309,10 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
         atual = 0;
         historiaFinal = "";
         telaInicial.style.display = 'none';
+        caixaResultado.classList.remove("mostrar");
         caixaPerguntas.classList.remove("mostrar");
         caixaAlternativas.classList.remove("mostrar");
         caixaHistoria.style.display = 'none';
-        caixaResultado.classList.remove("mostrar");
         mostraPergunta();
     }
 
