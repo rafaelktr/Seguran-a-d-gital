@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const perguntas = [
         {
@@ -74,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function mostraPergunta() {
         if (atual >= perguntas.length) {
-            mostraResultado();
+            mostraResultado("Você chegou ao fim da jornada.");
             return;
         }
         const perguntaAtual = perguntas[atual];
@@ -110,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
         caixaPerguntas.textContent = mensagem;
         textoResultado.textContent = historiaFinal;
         caixaResultado.classList.add("mostrar");
+        // Remover event listener anterior para evitar múltiplos listeners
+        botaoJogarNovamente.removeEventListener("click", jogaNovamente);
         botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
 
