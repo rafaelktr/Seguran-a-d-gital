@@ -71,6 +71,15 @@ button:hover {
     margin: 20px auto;
 }
 
+.caixa-historia {
+    display: none;
+    margin-top: 20px;
+}
+
+.caixa-historia .texto-historia {
+    margin-bottom: 10px;
+}
+
 .caixa-resultado {
     display: none;
     margin-top: 20px;
