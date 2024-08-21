@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alternativas: [
                 {
                     texto: "Entra na caverna.",
-                    historia: "Dentro da caverna, você encontra uma figura sombria no canto escuro. Você decide:",
+                    historia: "Dentro da caverna, você encontra uma figura sombria no canto escuro. Você decide explorar a figura ou sair da caverna?",
                     proxima: 3,
                 },
                 {
@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             ]
         },
-        // ... mais perguntas e alternativas
+        // Adicione as demais perguntas aqui seguindo o mesmo padrão
+        // Cada pergunta pode ter diferentes alternativas e histórias baseadas na escolha
     ];
 
     const caixaPerguntas = document.querySelector(".caixa-perguntas");
@@ -56,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         atual = 0;
         historiaFinal = "";
         telaInicial.style.display = 'none';
-        caixaPerguntas.style.display = 'none';
-        caixaAlternativas.style.display = 'none';
+        caixaPerguntas.style.display = 'block';
+        caixaAlternativas.style.display = 'block';
         caixaHistoria.style.display = 'none';
         caixaResultado.classList.remove("mostrar");
         mostraPergunta();
@@ -67,10 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
         caixaHistoria.style.display = 'none';
         caixaPerguntas.style.display = 'block';
         caixaAlternativas.style.display = 'block';
+        botaoContinuar.style.display = 'none';
+        
         if (atual >= perguntas.length) {
             mostraResultado();
             return;
         }
+        
         const perguntaAtual = perguntas[atual];
         caixaPerguntas.textContent = perguntaAtual.enunciado;
         caixaAlternativas.innerHTML = '';
@@ -115,4 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         atual = 0;
         historiaFinal = "";
         caixaResultado.classList.remove("mostrar");
-       
+        telaInicial.style.display = 'block';
+    }
+});
