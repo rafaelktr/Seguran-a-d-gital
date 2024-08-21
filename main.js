@@ -49,8 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const caixaPerguntas = document.querySelector(".caixa-perguntas");
     const caixaAlternativas = document.querySelector(".caixa-alternativas");
-    const caixaResultadoBom = document.querySelector(".caixa-resultado-bom");
-    const caixaResultadoRuim = document.querySelector(".caixa-resultado-ruim");
+    const caixaResultado = document.querySelector(".caixa-resultado");
     const textoResultado = document.querySelector(".texto-resultado");
     const botaoJogarNovamente = document.querySelector(".novamente-btn");
     const botaoIniciar = document.querySelector(".iniciar-btn");
@@ -67,8 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         telaInicial.style.display = 'none';
         caixaPerguntas.classList.remove("mostrar");
         caixaAlternativas.classList.remove("mostrar");
-        caixaResultadoBom.classList.remove("mostrar");
-        caixaResultadoRuim.classList.remove("mostrar");
+        caixaResultado.classList.remove("mostrar");
         mostraPergunta();
     }
 
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const perguntaAtual = perguntas[atual];
         caixaPerguntas.textContent = perguntaAtual.enunciado;
-        caixaAlternativas.innerHTML = '';
+        caixaAlternativas.innerHTML = ''; // Limpa alternativas anteriores
         mostraAlternativas(perguntaAtual);
     }
 
@@ -97,31 +95,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function respostaSelecionada(opcaoSelecionada) {
         historiaFinal += opcaoSelecionada.afirmacao + " ";
         if (opcaoSelecionada.proxima === 'end-win') {
-            mostraResultado("Você conseguiu voltar para casa!", "bom");
+            mostraResultado("Você conseguiu voltar para casa!");
         } else if (opcaoSelecionada.proxima === 'end-lose') {
-            mostraResultado("Você se perdeu na floresta.", "ruim");
+            mostraResultado("Você se perdeu na floresta.");
         } else {
             atual = opcaoSelecionada.proxima;
             mostraPergunta();
         }
     }
 
-    function mostraResultado(mensagem, tipo) {
-        caixaPerguntas.textContent = mensagem;
-        textoResultado.textContent = historiaFinal;
-        if (tipo === "bom") {
-            caixaResultadoBom.classList.add("mostrar");
-        } else if (tipo === "ruim") {
-            caixaResultadoRuim.classList.add("mostrar");
-        }
+    function mostraResultado(mensagem) {
+        caixaPerguntas.textContent = mensagem; // Mensagem final
+        textoResultado.textContent = historiaFinal; // História final
+        caixaAlternativas.innerHTML = ''; // Remove alternativas
+        caixaPerguntas.classList.remove("mostrar"); // Oculta perguntas
+        caixaAlternativas.classList.remove("mostrar"); // Oculta alternativas
+        caixaResultado.classList.add("mostrar"); // Exibe resultado
         botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
 
     function jogaNovamente() {
         atual = 0;
         historiaFinal = "";
-        caixaResultadoBom.classList.remove("mostrar");
-        caixaResultadoRuim.classList.remove("mostrar");
-        telaInicial.style.display = 'block';
+        caixaResultado.classList.remove("mostrar"); // Oculta resultado
+        telaInicial.style.display = 'block'; // Mostra tela inicial
     }
 });

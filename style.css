@@ -82,24 +82,3 @@ button:hover {
     display: block;
 }
 
-.caixa-resultado-bom,
-.caixa-resultado-ruim {
-    display: none;
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: var(--cor-secundaria);
-}
-
-.caixa-resultado-bom {
-    background-color: #4CAF50; /* Cor verde para resultado bom */
-}
-
-.caixa-resultado-ruim {
-    background-color: #F44336; /* Cor vermelha para resultado ruim */
-}
-
-.caixa-resultado-bom.mostrar,
-.caixa-resultado-ruim.mostrar {
-    display: block;
-}
