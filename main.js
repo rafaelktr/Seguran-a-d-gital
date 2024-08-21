@@ -331,3 +331,4 @@ document.addEventListener('DOMContentLoaded', () => {
         telaInicial.style.display = 'block';
     });
 });
+  
