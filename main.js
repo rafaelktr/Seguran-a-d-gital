@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         caixaPerguntas.classList.remove("mostrar");
         caixaAlternativas.classList.remove("mostrar");
         caixaResultado.classList.remove("mostrar");
+        caixaPerguntas.textContent = ""; // Limpar o texto da pergunta
+        caixaAlternativas.innerHTML = ""; // Limpar alternativas anteriores
         mostraPergunta();
     }
 
@@ -81,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const perguntaAtual = perguntas[atual];
         caixaPerguntas.textContent = perguntaAtual.enunciado;
-        caixaAlternativas.innerHTML = '';
+        caixaAlternativas.innerHTML = ''; // Limpar alternativas antigas
         mostraAlternativas(perguntaAtual);
     }
 
@@ -126,6 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         telaInicial.style.display = 'block';
         caixaPerguntas.classList.remove("mostrar");
         caixaAlternativas.classList.remove("mostrar");
+        caixaPerguntas.textContent = ""; // Limpar o texto da pergunta
+        caixaAlternativas.innerHTML = ""; // Limpar alternativas anteriores
         jogoIniciado = false; // Marcar que o jogo não foi iniciado
     }
 });
