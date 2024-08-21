@@ -310,9 +310,10 @@ document.addEventListener('DOMContentLoaded', () => {
         historiaFinal = "";
         telaInicial.style.display = 'none';
         caixaResultado.classList.remove("mostrar");
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
+        caixaPerguntas.classList.add("mostrar");
+        caixaAlternativas.classList.add("mostrar");
         caixaHistoria.style.display = 'none';
+        botaoContinuar.style.display = 'none'; // Esconde o botão "continuar" ao iniciar
         mostraPergunta();
     }
 
@@ -376,5 +377,9 @@ document.addEventListener('DOMContentLoaded', () => {
     botaoJogarNovamente.addEventListener('click', () => {
         caixaResultado.classList.remove("mostrar");
         telaInicial.style.display = 'block';
+        caixaPerguntas.classList.remove("mostrar");
+        caixaAlternativas.classList.remove("mostrar");
+        caixaHistoria.style.display = 'none';
+        botaoContinuar.style.display = 'none'; // Garante que o botão "continuar" esteja escondido na tela inicial
     });
 });
