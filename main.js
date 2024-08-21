@@ -57,12 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let atual = 0;
     let historiaFinal = "";
+    let jogoIniciado = false;
 
     botaoIniciar.addEventListener('click', iniciaJogo);
 
     function iniciaJogo() {
         atual = 0;
         historiaFinal = "";
+        jogoIniciado = true; // Marcar que o jogo foi iniciado
         telaInicial.style.display = 'none';
         caixaPerguntas.classList.remove("mostrar");
         caixaAlternativas.classList.remove("mostrar");
@@ -71,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function mostraPergunta() {
+        if (!jogoIniciado) return; // Verificar se o jogo foi iniciado
+
         if (atual >= perguntas.length) {
             mostraResultado("Você chegou ao fim da jornada.");
             return;
@@ -118,5 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         historiaFinal = "";
         caixaResultado.classList.remove("mostrar");
         telaInicial.style.display = 'block';
+        jogoIniciado = false; // Marcar que o jogo não foi iniciado
     }
 });
