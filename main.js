@@ -289,45 +289,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    let estadoAtual = 0;
+    const caixaPerguntas = document.querySelector(".caixa-perguntas");
+    const caixaAlternativas = document.querySelector(".caixa-alternativas");
+    const caixaHistoria = document.querySelector(".caixa-historia");
+    const textoHistoria = document.querySelector(".texto-historia");
+    const botaoContinuar = document.querySelector(".continuar-btn");
+    const caixaResultado = document.querySelector(".caixa-resultado");
+    const textoResultado = document.querySelector(".texto-resultado");
+    const botaoJogarNovamente = document.querySelector(".novamente-btn");
+    const botaoIniciar = document.querySelector(".iniciar-btn");
+    const telaInicial = document.querySelector(".tela-inicial");
 
-    function mostrarPergunta() {
-        const pergunta = perguntas[estadoAtual];
-        const perguntaEl = document.getElementById('pergunta');
-        const alternativasEl = document.getElementById('alternativas');
+    let atual = 0;
+    let historiaFinal = "";
 
-        perguntaEl.textContent = pergunta.enunciado;
-        alternativasEl.innerHTML = '';
+    botaoIniciar.addEventListener('click', iniciaJogo);
 
-        pergunta.alternativas.forEach((alternativa, index) => {
-            const botao = document.createElement('button');
-            botao.textContent = alternativa.texto;
-            botao.addEventListener('click', () => {
-                mostrarHistoria(alternativa.historia);
-                estadoAtual = alternativa.proxima;
-                if (estadoAtual === 'end-win' || estadoAtual === 'end-lose') {
-                    mostrarResultado(estadoAtual);
-                } else {
-                    mostrarPergunta();
-                }
-            });
-            alternativasEl.appendChild(botao);
-        });
+    function iniciaJogo() {
+        atual = 0;
+        historiaFinal = "";
+        telaInicial.style.display = 'none';
+        caixaPerguntas.classList.remove("mostrar");
+        caixaAlternativas.classList.remove("mostrar");
+        caixaHistoria.style.display = 'none';
+        caixaResultado.classList.remove("mostrar");
+        mostraPergunta();
     }
 
-    function mostrarHistoria(historia) {
-        const historiaEl = document.getElementById('historia');
-        historiaEl.textContent = historia;
+    function mostraPergunta() {
+        if (atual >= perguntas.length) {
+            mostraResultado();
+            return;
+        }
+        const perguntaAtual = perguntas[atual];
+        caixaPerguntas.textContent = perguntaAtual.enunciado;
+        caixaAlternativas.innerHTML = '';
+        mostraAlternativas(perguntaAtual);
+        caixaPerguntas.classList.add("mostrar");
+        caixaAlternativas.classList.add("mostrar");
+        caixaHistoria.style.display = 'none';
+        botaoContinuar.style.display = 'none'; // Esconde o botão "continuar" ao mostrar uma nova pergunta
     }
 
-    function mostrarResultado(resultado) {
-        const resultadoEl = document.getElementById('resultado');
-        if (resultado === 'end-win') {
-            resultadoEl.textContent = "Parabéns! Você encontrou o caminho de volta para casa!";
-        } else if (resultado === 'end-lose') {
-            resultadoEl.textContent = "Você se perdeu na floresta. Tente novamente!";
+    function mostraAlternativas(pergunta) {
+        for (const alternativa of pergunta.alternativas) {
+            const botaoAlternativa = document.createElement("button");
+            botaoAlternativa.textContent = alternativa
         }
     }
-
-    mostrarPergunta();
-});
