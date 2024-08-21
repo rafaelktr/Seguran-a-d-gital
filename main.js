@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const perguntas = [
         {
@@ -17,7 +15,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             ]
         },
-        // Adicione as suas outras perguntas aqui
+        {
+            enunciado: "Você encontra uma caverna. O que faz?",
+            alternativas: [
+                {
+                    texto: "Entra na caverna.",
+                    afirmacao: "Dentro da caverna, você não encontra uma saída para a floresta.",
+                    proxima: 3,
+                },
+                {
+                    texto: "Ignora a caverna.",
+                    afirmacao: "Você continua se perdendo na floresta.",
+                    proxima: 4,
+                },
+            ]
+        },
         {
             enunciado: "Você chega a uma ponte. O que faz?",
             alternativas: [
@@ -42,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const botaoJogarNovamente = document.querySelector(".novamente-btn");
     const botaoIniciar = document.querySelector(".iniciar-btn");
     const telaInicial = document.querySelector(".tela-inicial");
-    const botaoContinuar = document.createElement("button");
 
     let atual = 0;
     let historiaFinal = "";
@@ -72,10 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function mostraAlternativas(pergunta) {
         for (const alternativa of pergunta.alternativas) {
-            const botaoAlternativa = document.createElement("button");
-            botaoAlternativa.textContent = alternativa.texto;
-            botaoAlternativa.addEventListener("click", () => respostaSelecionada(alternativa));
-            caixaAlternativas.appendChild(botaoAlternativa);
+            const botaoAlternativas = document.createElement("button");
+            botaoAlternativas.textContent = alternativa.texto;
+            botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+            caixaAlternativas.appendChild(botaoAlternativas);
         }
         caixaPerguntas.classList.add("mostrar");
         caixaAlternativas.classList.add("mostrar");
@@ -83,31 +94,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function respostaSelecionada(opcaoSelecionada) {
         historiaFinal += opcaoSelecionada.afirmacao + " ";
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-
-        // Cria e configura o botão "Continuar"
-        botaoContinuar.textContent = "Continuar";
-        botaoContinuar.classList.add("continuar-btn");
-        botaoContinuar.addEventListener("click", () => {
-            if (opcaoSelecionada.proxima === 'end-win') {
-                mostraResultado("Você conseguiu voltar para casa!");
-            } else if (opcaoSelecionada.proxima === 'end-lose') {
-                mostraResultado("Você se perdeu na floresta.");
-            } else {
-                atual = opcaoSelecionada.proxima;
-                mostraPergunta();
-            }
-        });
-
-        caixaResultado.innerHTML = `<p>${opcaoSelecionada.afirmacao}</p>`;
-        caixaResultado.appendChild(botaoContinuar);
-        caixaResultado.classList.add("mostrar");
+        if (opcaoSelecionada.proxima === 'end-win') {
+            mostraResultado("Você conseguiu voltar para casa!");
+        } else if (opcaoSelecionada.proxima === 'end-lose') {
+            mostraResultado("Você se perdeu na floresta.");
+        } else {
+            atual = opcaoSelecionada.proxima;
+            mostraPergunta();
+        }
     }
 
     function mostraResultado(mensagem) {
+        // Limpar as perguntas e alternativas
+        caixaPerguntas.textContent = '';
+        caixaAlternativas.innerHTML = '';
+
+        // Exibir mensagem final
         caixaPerguntas.textContent = mensagem;
         textoResultado.textContent = historiaFinal;
+
         caixaResultado.classList.add("mostrar");
         botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
@@ -117,7 +122,5 @@ document.addEventListener('DOMContentLoaded', () => {
         historiaFinal = "";
         caixaResultado.classList.remove("mostrar");
         telaInicial.style.display = 'block';
-        botaoJogarNovamente.removeEventListener("click", jogaNovamente);
     }
 });
-
