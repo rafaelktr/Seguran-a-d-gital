@@ -289,97 +289,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    const caixaPerguntas = document.querySelector(".caixa-perguntas");
-    const caixaAlternativas = document.querySelector(".caixa-alternativas");
-    const caixaHistoria = document.querySelector(".caixa-historia");
-    const textoHistoria = document.querySelector(".texto-historia");
-    const botaoContinuar = document.querySelector(".continuar-btn");
-    const caixaResultado = document.querySelector(".caixa-resultado");
-    const textoResultado = document.querySelector(".texto-resultado");
-    const botaoJogarNovamente = document.querySelector(".novamente-btn");
-    const botaoIniciar = document.querySelector(".iniciar-btn");
-    const telaInicial = document.querySelector(".tela-inicial");
 
-    let atual = 0;
-    let historiaFinal = "";
+    const startBtn = document.getElementById('start-btn');
+    const questionContainer = document.getElementById('question-container');
+    const questionText = document.getElementById('question-text');
+    const alternativesContainer = document.getElementById('alternatives-container');
+    const continueBtn = document.getElementById('continue-btn');
 
-    botaoIniciar.addEventListener('click', iniciaJogo);
+    let currentQuestionIndex = 0;
 
-    function iniciaJogo() {
-        atual = 0;
-        historiaFinal = "";
-        telaInicial.style.display = 'none';
-        caixaResultado.classList.remove("mostrar");
-        caixaPerguntas.classList.add("mostrar");
-        caixaAlternativas.classList.add("mostrar");
-        caixaHistoria.style.display = 'none';
-        botaoContinuar.style.display = 'none'; // Esconde o botão "continuar" ao iniciar
-        mostraPergunta();
-    }
+    startBtn.addEventListener('click', () => {
+        startBtn.classList.add('hidden');
+        questionContainer.classList.remove('hidden');
+        showQuestion(currentQuestionIndex);
+    });
 
-    function mostraPergunta() {
-        if (atual >= perguntas.length) {
-            mostraResultado();
+    continueBtn.addEventListener('click', () => {
+        currentQuestionIndex = perguntas[currentQuestionIndex].alternativas.find(alt => alt.selecionada)?.proxima;
+        if (currentQuestionIndex !== undefined) {
+            showQuestion(currentQuestionIndex);
+        }
+    });
+
+    function showQuestion(index) {
+        if (index === 'end-win') {
+            questionText.textContent = "Parabéns! Você encontrou a saída e voltou para casa!";
+            alternativesContainer.innerHTML = '';
+            continueBtn.classList.add('hidden');
+            return;
+        } else if (index === 'end-lose') {
+            questionText.textContent = "Você se perdeu na floresta.";
+            alternativesContainer.innerHTML = '';
+            continueBtn.classList.add('hidden');
             return;
         }
-        const perguntaAtual = perguntas[atual];
-        caixaPerguntas.textContent = perguntaAtual.enunciado;
-        caixaAlternativas.innerHTML = '';
-        mostraAlternativas(perguntaAtual);
-        caixaPerguntas.classList.add("mostrar");
-        caixaAlternativas.classList.add("mostrar");
-        caixaHistoria.style.display = 'none';
-        botaoContinuar.style.display = 'none'; // Esconde o botão "continuar" ao mostrar uma nova pergunta
+
+        const pergunta = perguntas[index];
+        questionText.textContent = pergunta.enunciado;
+        alternativesContainer.innerHTML = '';
+
+        pergunta.alternativas.forEach((alternativa, i) => {
+            const btn = document.createElement('button');
+            btn.textContent = alternativa.texto;
+            btn.addEventListener('click', () => {
+                pergunta.alternativas.forEach((alt) => {
+                    alt.selecionada = false;
+                });
+                alternativa.selecionada = true;
+                questionText.textContent = alternativa.historia;
+                continueBtn.classList.remove('hidden');
+            });
+            alternativesContainer.appendChild(btn);
+        });
+
+        continueBtn.classList.add('hidden');
     }
-
-    function mostraAlternativas(pergunta) {
-        for (const alternativa of pergunta.alternativas) {
-            const botaoAlternativa = document.createElement("button");
-            botaoAlternativa.textContent = alternativa.texto;
-            botaoAlternativa.addEventListener("click", () => respostaSelecionada(alternativa));
-            caixaAlternativas.appendChild(botaoAlternativa);
-        }
-    }
-
-    function respostaSelecionada(opcaoSelecionada) {
-        historiaFinal += opcaoSelecionada.historia + " ";
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-        caixaHistoria.style.display = 'block';
-        textoHistoria.textContent = opcaoSelecionada.historia;
-        botaoContinuar.style.display = 'block'; // Mostra o botão "continuar" após a resposta
-
-        // Remove o listener antigo para evitar múltiplos eventos
-        botaoContinuar.removeEventListener("click", continuaPergunta);
-        // Adiciona um novo listener com o contexto correto
-        botaoContinuar.addEventListener("click", () => continuaPergunta(opcaoSelecionada));
-    }
-
-    function continuaPergunta(opcaoSelecionada) {
-        if (opcaoSelecionada.proxima === 'end-win' || opcaoSelecionada.proxima === 'end-lose') {
-            mostraResultado();
-        } else {
-            atual = opcaoSelecionada.proxima;
-            caixaHistoria.style.display = 'none';
-            botaoContinuar.style.display = 'none'; // Esconde o botão "continuar" após continuar para a próxima pergunta
-            mostraPergunta();
-        }
-    }
-
-    function mostraResultado() {
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-        caixaHistoria.style.display = 'none';
-        caixaResultado.classList.add("mostrar");
-        textoResultado.textContent = historiaFinal.includes('ponte') ? "Você atravessou a ponte e voltou para casa!" : "Você se perdeu na floresta.";
-    }
-
-    botaoJogarNovamente.addEventListener('click', () => {
-        caixaResultado.classList.remove("mostrar");
-        telaInicial.style.display = 'block';
-        caixaPerguntas.classList.remove("mostrar");
-        caixaAlternativas.classList.remove("mostrar");
-        caixaHistoria.style.display = 'none';
-        botaoContinuar.style.display = 'none'; // Garante que o botão "continuar" esteja escondido na tela inicial
-    });
 });
