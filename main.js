@@ -112,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         caixaPerguntas.textContent = mensagem;
         textoResultado.textContent = historiaFinal;
         caixaResultado.classList.add("mostrar");
+        caixaPerguntas.classList.remove("mostrar");
+        caixaAlternativas.classList.remove("mostrar");
         // Remover event listener anterior para evitar múltiplos listeners
         botaoJogarNovamente.removeEventListener("click", jogaNovamente);
         botaoJogarNovamente.addEventListener("click", jogaNovamente);
@@ -122,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
         historiaFinal = "";
         caixaResultado.classList.remove("mostrar");
         telaInicial.style.display = 'block';
+        caixaPerguntas.classList.remove("mostrar");
+        caixaAlternativas.classList.remove("mostrar");
         jogoIniciado = false; // Marcar que o jogo não foi iniciado
     }
 });
