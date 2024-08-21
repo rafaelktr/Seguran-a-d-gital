@@ -1,7 +1,7 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Documento carregado');
-    
+
     const perguntas = [
         {
             enunciado: "Você está na floresta. O que faz?",
@@ -290,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-
     const startBtn = document.getElementById('start-btn');
     const questionContainer = document.getElementById('question-container');
     const questionText = document.getElementById('question-text');
@@ -300,14 +299,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentQuestionIndex = 0;
 
     startBtn.addEventListener('click', () => {
+        console.log('Iniciando o jogo');
         startBtn.classList.add('hidden');
         questionContainer.classList.remove('hidden');
         showQuestion(currentQuestionIndex);
     });
 
     continueBtn.addEventListener('click', () => {
-        currentQuestionIndex = perguntas[currentQuestionIndex].alternativas.find(alt => alt.selecionada)?.proxima;
-        if (currentQuestionIndex !== undefined) {
+        console.log('Botão Continuar clicado');
+        const proximaPergunta = perguntas[currentQuestionIndex].alternativas.find(alt => alt.selecionada)?.proxima;
+        if (proximaPergunta !== undefined) {
+            currentQuestionIndex = proximaPergunta;
             showQuestion(currentQuestionIndex);
         }
     });
