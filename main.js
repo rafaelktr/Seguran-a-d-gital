@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
         questionText.textContent = pergunta.enunciado;
         alternativesContainer.innerHTML = '';
 
-        pergunta.alternativas.forEach((alternativa, i) => {
+        pergunta.alternativas.forEach((alternativa) => {
             const btn = document.createElement('button');
             btn.textContent = alternativa.texto;
             btn.addEventListener('click', () => {
