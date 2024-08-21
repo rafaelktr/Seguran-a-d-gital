@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alternativas: [
                 {
                     texto: "Entra na caverna.",
-                    afirmacao: "Dentro da caverna, você não encontra uma saída para a floresta.",
+                    afirmacao: "Dentro da caverna, você encontra uma saída para a floresta.",
                     proxima: 3,
                 },
                 {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const perguntaAtual = perguntas[atual];
         caixaPerguntas.textContent = perguntaAtual.enunciado;
-        caixaAlternativas.innerHTML = '';
+        caixaAlternativas.innerHTML = ''; // Limpa alternativas anteriores
         mostraAlternativas(perguntaAtual);
     }
 
@@ -105,22 +105,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function mostraResultado(mensagem) {
-        // Limpar as perguntas e alternativas
-        caixaPerguntas.textContent = '';
-        caixaAlternativas.innerHTML = '';
-
-        // Exibir mensagem final
-        caixaPerguntas.textContent = mensagem;
-        textoResultado.textContent = historiaFinal;
-
-        caixaResultado.classList.add("mostrar");
+        caixaPerguntas.textContent = mensagem; // Mensagem final
+        textoResultado.textContent = historiaFinal; // História final
+        caixaAlternativas.innerHTML = ''; // Remove alternativas
+        caixaPerguntas.classList.remove("mostrar"); // Oculta perguntas
+        caixaAlternativas.classList.remove("mostrar"); // Oculta alternativas
+        caixaResultado.classList.add("mostrar"); // Exibe resultado
         botaoJogarNovamente.addEventListener("click", jogaNovamente);
     }
 
     function jogaNovamente() {
         atual = 0;
         historiaFinal = "";
-        caixaResultado.classList.remove("mostrar");
-        telaInicial.style.display = 'block';
+        caixaResultado.classList.remove("mostrar"); // Oculta resultado
+        telaInicial.style.display = 'block'; // Mostra tela inicial
     }
 });
