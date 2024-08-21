@@ -1,10 +1,9 @@
 // script.js
-
 document.addEventListener('DOMContentLoaded', () => {
-    const perguntas = [
-        {
+    console.log('Documento carregado');
+
             enunciado: "Você está na floresta. O que faz?",
-            alternativas: [
+            alternativas; [
                 {
                     texto: "Procura um abrigo.",
                     historia: "Você encontra um abrigo seguro e continua sua jornada. No entanto, você sente que está sendo observado.",
@@ -287,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             ]
         }
-    ];
+    ,
 
 
     const startBtn = document.getElementById('start-btn');
