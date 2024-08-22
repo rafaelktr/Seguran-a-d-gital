@@ -380,7 +380,7 @@ alternativas: [
 {
 texto: "Segue o caminho de volta.",
 historia: "Você volta ao início e precisa começar novamente.",
-proxima: 'end-restart',
+
 },
 {
 texto: "Ignora o caminho e explora mais.",
