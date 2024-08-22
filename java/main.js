@@ -55,7 +55,7 @@ function respostaSelecionada(opcaoSelecionada) {
         mostraResultado();
         return;
     }
-    mostraPergunta();
+
 }
 
 function mostraResultado() {
