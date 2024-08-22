@@ -1,4 +1,6 @@
-// script.js
+import { aleatorio, nome } from './random.js';
+import { perguntas } from './quetao.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Documento carregado');
 
