@@ -7,14 +7,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você encontra um abrigo seguro e continua sua jornada. No entanto, você sente que está sendo observado."
                 ],
-                proxima: 1,
+                proxima: 0,
             },
             {
                 texto: "Continua andando.",
                 afirmacao: [
                     "Você se sente cada vez mais perdido na floresta. O medo aumenta e você ouve ruídos estranhos."
                 ],
-                proxima: 2,
+                proxima: 0,
             },
         ]
     },
@@ -33,7 +33,7 @@ export const perguntas = [
                 afirmacao: [
                     "Você se aproxima do canto escuro e encontra uma figura sombria. Você decide se esconder."
                 ],
-                proxima: 3,
+                proxima: 1,
             },
         ]
     },
@@ -45,7 +45,7 @@ export const perguntas = [
                 afirmacao: [
                     "Você se aproxima do canto escuro e encontra uma figura sombria. Você decide se esconder."
                 ],
-                proxima: 4,
+                proxima: 2,
             },
             {
                 texto: "Sai da caverna.",
