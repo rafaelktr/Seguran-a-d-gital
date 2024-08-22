@@ -52,7 +52,7 @@ export const perguntas = [
                 afirmacao: [
                     "Você rapidamente sai da caverna e continua explorando. Encontra uma clareira. O que faz?"
                 ],
-                proxima: 4,
+                proxima: 2,
             },
         ]
     },
@@ -64,14 +64,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você segue ao longo do rio e encontra uma ponte. O que faz?"
                 ],
-                proxima: 7,
+                proxima: 3,
             },
             {
                 texto: "Tenta atravessar o rio.",
                 afirmacao: [
                     "Você tenta atravessar o rio, mas a correnteza é forte e você se afasta. Você volta para a margem ou procura outro caminho?"
                 ],
-                proxima: 7,
+                proxima: 3,
             },
         ]
     },
@@ -83,14 +83,14 @@ export const perguntas = [
                 afirmacao: [
                     "Dentro da cabana, você encontra uma passagem secreta que leva a uma nova área da floresta. O que faz?"
                 ],
-                proxima: 5,
+                proxima: 4,
             },
             {
                 texto: "Ignora a cabana.",
                 afirmacao: [
                     "█Você continua explorando a clareira e encontra um grupo de árvores. O que faz?"
                 ],
-                proxima: 6,
+                proxima: 4,
             },
         ]
     },
@@ -102,6 +102,7 @@ export const perguntas = [
                 afirmacao: [
                     "Você atravessa a ponte e finalmente volta para casa!"
                 ],
+                proxima: 4,
                 
             },
             {
