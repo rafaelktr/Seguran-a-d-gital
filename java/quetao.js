@@ -26,7 +26,7 @@ export const perguntas = [
                 afirmacao: [
                     "Você continua se perdendo na floresta e encontra um campo de flores. O que faz?"
                 ],
-                proxima: 3,
+                proxima: 1,
             },
             {
                 texto: "Entra na caverna",
