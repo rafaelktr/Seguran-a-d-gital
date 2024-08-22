@@ -1,165 +1,165 @@
 export const perguntas = [
     {
-        enunciado: "O sol está quente. Até demais. O primeiro feixo de luz que bate o seu rosto em quase uma década. Ou, pelo menos é o que você pensa. Apesar de tudo, você ainda se lembra dos caminhos afrente, e como eles te levam pela foresta. Igual a suas escolhas pasadas, redundantes, pois os dois te levarão ao mesmo local.",
+        enunciado: "Você está na floresta. O que faz?.",
         alternativas: [
             {
-                texto: "Ir pelo caminho limpo.",
+                texto: "Procura um abrigo.",
                 afirmacao: [
-                    "█████ foi um covarde. Desgraça a raça humana."
+                    "Você encontra um abrigo seguro e continua sua jornada. No entanto, você sente que está sendo observado."
                 ],
                 proxima: 1,
             },
             {
-                texto: "Ir pelo caminho denso.",
+                texto: "Continua andando.",
                 afirmacao: [
-                    "█████ tinha coragem ínutil. Algo que o levou a nada."
+                    "Você se sente cada vez mais perdido na floresta. O medo aumenta e você ouve ruídos estranhos."
                 ],
                 proxima: 2,
             },
         ]
     },
     {
-        enunciado: "Um coelho está na sua frente. Preso em uma armadilha de urso não feita para ele. Sua perna esta quebrada, sangrando, mas ainda vivo. Salva-lo não ira te trazer nada, pois ele vai morrer de uma forma ou outra. Seja sangrando aqui, ou para fora.",
+        enunciado: "Você encontra uma caverna. O que faz",
         alternativas: [
             {
-                texto: "Liberte-o.",
+                texto: "Ignora a caverna.",
                 afirmacao: [
-                    "█████ odiava dor, seja em si ou em outros. Sacrificou tempo para se satisfazer."
+                    "Você continua se perdendo na floresta e encontra um campo de flores. O que faz?"
                 ],
                 proxima: 3,
             },
             {
-                texto: "Abandone-o.",
+                texto: "Entra na caverna",
                 afirmacao: [
-                    "█████ adorava ver dor, especialmente as dos outros. Egoismo que não acaba mais."
+                    "Você se aproxima do canto escuro e encontra uma figura sombria. Você decide se esconder."
                 ],
                 proxima: 3,
             },
         ]
     },
     {
-        enunciado: "Seus passos finalmente te levou a um lugar inqueto. Tem um corpo na sua frente, e animais estão pegando os nutrientes nescessários para sua própria sobrevivência. Você não sente nada pelo corpo (mesmo o reconhecendo), mas uma parte de sua mente te deseja que faça o que você deseja.",
+        enunciado: "Dentro da caverna, você percebe algo no canto escuro. O que faz?",
         alternativas: [
             {
-                texto: "Deixe a floresta o conquistar.",
+                texto: "Explora o canto escuro.",
                 afirmacao: [
-                    "Prefiriu abandonar amigos para o bem de outros. Honorável pelas razões erradas."
+                    "Você se aproxima do canto escuro e encontra uma figura sombria. Você decide se esconder."
                 ],
                 proxima: 4,
             },
             {
-                texto: "De honra a pessoa morta.",
+                texto: "Sai da caverna.",
                 afirmacao: [
-                    "Colocou amigos acima de outros. Muito honorável para seu próprio bem."
+                    "Você rapidamente sai da caverna e continua explorando. Encontra uma clareira. O que faz?"
                 ],
                 proxima: 4,
             },
         ]
     },
     {
-        enunciado: "Tem uma parede enorme na sua frente. Vista a quilômetros de distância. Tem uma porta be na base, com duas torretas olhando de lado a outro, enferrugadas mas ainda funcionando.",
+        enunciado: "Você volta para a floresta e encontra um rio. O que faz?",
         alternativas: [
             {
-                texto: "Caminhar até elas com calma.",
+                texto: "Segue ao longo do rio.",
                 afirmacao: [
-                    "Achou que tinha uma escolha."
+                    "Você segue ao longo do rio e encontra uma ponte. O que faz?"
                 ],
                 proxima: 7,
             },
             {
-                texto: "Correr para passar pela porta.",
+                texto: "Tenta atravessar o rio.",
                 afirmacao: [
-                    "Aceitou a morte que veio."
+                    "Você tenta atravessar o rio, mas a correnteza é forte e você se afasta. Você volta para a margem ou procura outro caminho?"
                 ],
                 proxima: 7,
             },
         ]
     },
     {
-        enunciado: "Um grito é ouvido na floresta, em algum local entre as árvores. Um sentimento primordial dentro de você te fala que está sendo visto, mas você não sabe da onde. Em segundos, passos aceleram até você correndo entre as folhas mortas.",
+        enunciado: "Você decide voltar para a floresta e encontra uma clareira com uma cabana abandonada. O que faz?",
         alternativas: [
             {
-                texto: "Correr para esquerda.",
+                texto: "Explora a cabana.",
                 afirmacao: [
-                    "████ nunca foi bom em decisôes."
+                    "Dentro da cabana, você encontra uma passagem secreta que leva a uma nova área da floresta. O que faz?"
                 ],
                 proxima: 5,
             },
             {
-                texto: "Correr para a direita.",
+                texto: "Ignora a cabana.",
                 afirmacao: [
-                    "████ trabalha mal em situações de alta pressão."
+                    "█Você continua explorando a clareira e encontra um grupo de árvores. O que faz?"
                 ],
                 proxima: 6,
             },
         ]
     },
     {
-        enunciado: "Você cai em uma armadilha escondida por folhas. Em meio segundo, tudo fica devagar. O tempo pareçe estar em camera lenta em sua vista. Espinhos de madeira estão no final desse buraco, colocados para cima em esperança de ter algo cair em cima. Depois de cair, seu corpo dói, mas continua vivo. Nos últimos segundos, você pode ver uma figura rindo de sua situação, olhando para baixo, diretamente acima do buraco.",
+        enunciado: "Você segue ao longo do rio e encontra uma ponte. O que faz?",
         alternativas: [
             {
-                texto: "Você tem uma escolha?",
+                texto: "Atravesse a ponte.",
                 afirmacao: [
-                    "Morreu de forma injusta, mas não sozinho. STATUS: Morto."
+                    "Você atravessa a ponte e finalmente volta para casa!"
                 ],
                 
             },
             {
-                texto: "Você tem uma escolha?",
+                texto: "Volta para a floresta.",
                 afirmacao: [
-                    "Morreu de forma injusta, mas não sozinho. STATUS: Morto."
+                    "Você se perde novamente na floresta."
                 ],
                 
             },
         ]
     },
     {
-        enunciado: "Sua sorte te salvou mais uma vez. Algo passou pelas árvores, correndo acima de tudo em seu caminho. Isso inclui o seu pequeno 'amigo' que te perseguiu, o levando também. Agora, da sua frente, há uma grande parede, alta o bastante para cobrir sua visão, mesmo depois de você olhar para cima. Tem uma porta a direita, alguns quilômetros dai.",
+        enunciado: "Você tenta atravessar o rio, mas é arrastado pela correnteza e se afasta. O que faz?",
         alternativas: [
             {
-                texto: "Andar a direita discretamente, sendo calmo.",
+                texto: "Volta para a margem e procura um novo caminho.",
                 afirmacao: [
-                    "Cuidadoso, até demais, mas salvou sua pele o bastante."
+                    "Você volta para a margem e encontra uma trilha escondida entre as árvores. O que faz?"
                 ],
                 proxima: 8,
             },
             {
-                texto: "Ir a direita sem precaução, pois você não tem nada a temer.",
+                texto: "Segue o curso do rio.",
                 afirmacao: [
-                    "Completo idiota."
+                    "Você decide seguir o curso do rio e encontra uma cachoeira. O que faz?"
                 ],
                 proxima: 7,
             },
         ]
     },
     {
-        enunciado: "As torretas ativaram. Seu corpo ficou cheio de balas em questões de segundos. Foi um erro ter saído de seu lar.",
+        enunciado: "Você volta para a margem e encontra uma trilha escondida entre as árvores. O que faz?",
         alternativas: [
             {
-                texto: "Você tem uma escolha?",
+                texto: "Segue pela trilha.",
                 afirmacao: [
-                    "████ pensou que poderia ter um final feliz. STATUS: Morto."
+                    "Você segue pela trilha e encontra um velho abrigo. O que faz?"
                 ],
             },
             {
-                texto: "Você tem uma escolha?",
+                texto: "Ignora a trilha.",
                 afirmacao: [
-                    "████ pensou que poderia ter um final feliz. STATUS: Morto."
+                    "Você decide continuar explorando e encontra um campo de flores. O que faz?"
                 ],
             },
         ]
     },
     {
-        enunciado: "A porta está ai, para ser aberta. Existe duas torretas acima, mas elas não podem te ver. Um paço afrente, pois sua curiosidade te chama. Você não pensa duas vezes, e abre a porta, a fechando atrás de você mesmo.",
+        enunciado: "Você decide seguir o curso do rio e encontra uma cachoeira. O que faz?",
         alternativas: [
             {
-                texto: "Você tem uma outra escolha?",
+                texto: "Volta para a margem do rio.",
                 afirmacao: [
-                    "STATUS: Vivo"
+                    "Você volta para a margem do rio e encontra uma trilha para a floresta. O que faz?"
                 ]
             },
             {
-                texto: "Você tem uma outra escolha?",
+                texto: "Você explora a área ao redor da cachoeira e encontra uma passagem subterrânea. O que faz?",
                 afirmacao: [
                     "STATUS: Vivo"
                 ]
