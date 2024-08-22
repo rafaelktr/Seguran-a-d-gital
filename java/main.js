@@ -55,11 +55,11 @@ function respostaSelecionada(opcaoSelecionada) {
         mostraResultado();
         return;
     }
-
+    mostraPergunta();
 }
 
 function mostraResultado() {
-    caixaPerguntas.textContent = 'Parabéns';
+    caixaPerguntas.textContent = 'Par';
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = "";
     caixaResultado.classList.add("mostrar");
