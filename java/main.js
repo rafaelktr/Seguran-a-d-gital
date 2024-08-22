@@ -1,65 +1,82 @@
 import { aleatorio, nome } from './random.js';
 import { perguntas } from './quetao.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Documento carregado');
+const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixaPerguntas = document.querySelector(".caixa-perguntas");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultado = document.querySelector(".caixa-resultado");
+const textoResultado = document.querySelector(".texto-resultado");
+const botaoJogarNovamente = document.querySelector(".novamente-btn");
+const botaoIniciar = document.querySelector(".iniciar-btn");
+const telaInicial = document.querySelector(".tela-inicial");
 
+let atual = 0;
+let perguntaAtual;
+let historiaFinal = "";
 
-    const startBtn = document.getElementById('start-btn');
-    const questionContainer = document.getElementById('question-container');
-    const questionText = document.getElementById('question-text');
-    const alternativesContainer = document.getElementById('alternatives-container');
-    const continueBtn = document.getElementById('continue-btn');
+botaoIniciar.addEventListener('click', iniciaJogo);
 
-    let currentQuestionIndex = 0;
+function iniciaJogo() {
+    atual = 0;
+    historiaFinal = "";
+    telaInicial.style.display = 'none';
+    caixaPerguntas.classList.remove("mostrar");
+    caixaAlternativas.classList.remove("mostrar");
+    caixaResultado.classList.remove("mostrar");
+    mostraPergunta();
+}
 
-    startBtn.addEventListener('click', () => {
-        console.log('Iniciando o jogo');
-        startBtn.classList.add('hidden');
-        questionContainer.classList.remove('hidden');
-        showQuestion(currentQuestionIndex);
-    });
-
-    continueBtn.addEventListener('click', () => {
-        console.log('Botão Continuar clicado');
-        const proximaPergunta = perguntas[currentQuestionIndex].alternativas.find(alt => alt.selecionada)?.proxima;
-        if (proximaPergunta !== undefined) {
-            currentQuestionIndex = proximaPergunta;
-            showQuestion(currentQuestionIndex);
-        }
-    });
-
-    function showQuestion(index) {
-        if (index === 'end-win') {
-            questionText.textContent = "Parabéns! Você encontrou a saída e voltou para casa!";
-            alternativesContainer.innerHTML = '';
-            continueBtn.classList.add('hidden');
-            return;
-        } else if (index === 'end-lose') {
-            questionText.textContent = "Você se perdeu na floresta.";
-            alternativesContainer.innerHTML = '';
-            continueBtn.classList.add('hidden');
-            return;
-        }
-
-        const pergunta = perguntas[index];
-        questionText.textContent = pergunta.enunciado;
-        alternativesContainer.innerHTML = '';
-
-        pergunta.alternativas.forEach((alternativa) => {
-            const btn = document.createElement('button');
-            btn.textContent = alternativa.texto;
-            btn.addEventListener('click', () => {
-                pergunta.alternativas.forEach((alt) => {
-                    alt.selecionada = false;
-                });
-                alternativa.selecionada = true;
-                questionText.textContent = alternativa.historia;
-                continueBtn.classList.remove('hidden');
-            });
-            alternativesContainer.appendChild(btn);
-        });
-
-        continueBtn.classList.add('hidden');
+function mostraPergunta() {
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
     }
-});
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+}
+
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacoes = aleatorio(opcaoSelecionada.afirmacao);
+    historiaFinal += afirmacoes + " ";
+    if (opcaoSelecionada.proxima !== undefined) {
+        atual = opcaoSelecionada.proxima;
+    } else {
+        mostraResultado();
+        return;
+    }
+    mostraPergunta();
+}
+
+function mostraResultado() {
+    caixaPerguntas.textContent = `REPORT 19-B. 1963, 2 DE JULHO.`;
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
+    caixaResultado.classList.add("mostrar");
+    botaoJogarNovamente.addEventListener("click", jogaNovamente);
+}
+
+function jogaNovamente() {
+    atual = 0;
+    historiaFinal = "";
+    caixaResultado.classList.remove("mostrar");
+    mostraPergunta();
+}
+
+function substituiNome() {
+    for (const pergunta of perguntas) {
+        pergunta.enunciado = pergunta.enunciado.replace(/você/g, nome);
+    }
+}
+
+substituiNome();
