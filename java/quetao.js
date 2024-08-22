@@ -80,12 +80,12 @@ export const perguntas = [
             {
                 texto: "Atravesse a ponte.",
                 afirmacao: ["Você atravessa a ponte e finalmente volta para casa!"],
-                proxima: null, // Sem próximo, pois é um final
+                
             },
             {
                 texto: "Volta para a floresta.",
                 afirmacao: ["Você se perde novamente na floresta."],
-                proxima: null, // Sem próximo, pois é um final
+            
             },
         ]
     },
