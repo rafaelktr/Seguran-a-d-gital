@@ -80,12 +80,12 @@ alternativas: [
 {
 texto: "Atravesse a ponte.",
 historia: "Você atravessa a ponte e finalmente volta para casa!",
-proxima: 'end-win',
+
 },
 {
 texto: "Volta para a floresta.",
 historia: "Você se perde novamente na floresta.",
-proxima: 'end-lose',
+
 },
 ]
 },
@@ -230,12 +230,12 @@ alternativas: [
 {
 texto: "Atravesse a ponte.",
 historia: "Você atravessa a ponte e finalmente volta para casa!",
-proxima: 'end-win',
+
 },
 {
 texto: "Volta para a floresta.",
 historia: "Você se perde novamente na floresta.",
-proxima: 'end-lose',
+
 },
 ]
 },
@@ -320,12 +320,12 @@ alternativas: [
 {
 texto: "Atravesse a ponte.",
 historia: "Você atravessa a ponte e finalmente volta para casa!",
-proxima: 'end-win',
+
 },
 {
 texto: "Volta para a clareira.",
 historia: "Você volta para a clareira e encontra um caminho de volta para a floresta.",
-proxima: 'end-lose',
+
 },
 ]
 },
@@ -350,12 +350,12 @@ alternativas: [
 {
 texto: "Atravesse a ponte.",
 historia: "Você atravessa a ponte e finalmente volta para casa!",
-proxima: 'end-win',
+
 },
 {
 texto: "Volta para o mapa.",
 historia: "Você volta para o mapa e encontra uma nova direção para seguir.",
-proxima: 'end-lose',
+
 },
 ]
 },
@@ -400,7 +400,7 @@ proxima: 44,
 {
 texto: "Ignora o mapa e volta para a entrada da caverna.",
 historia: "Você volta para a entrada da caverna e encontra uma nova direção para seguir.",
-proxima: 'end-lose',
+
 },
 ]
 },
@@ -415,7 +415,7 @@ proxima: 45,
 {
 texto: "Ignora a nova direção e continua explorando.",
 historia: "Você continua explorando e se perde novamente.",
-proxima: 'end-lose',
+
 },
 ]
 },
@@ -425,12 +425,11 @@ alternativas: [
 {
 texto: "Atravesse a ponte.",
 historia: "Você atravessa a ponte e finalmente volta para casa!",
-proxima: 'end-win',
 },
 {
 texto: "Volta para a floresta.",
 historia: "Você se perde novamente na floresta.",
-proxima: 'end-lose',
+
 },
 ]
 }
