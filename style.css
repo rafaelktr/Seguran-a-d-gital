@@ -19,7 +19,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-image: url('escuridão.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-image: url('escuridão.jpg'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -33,7 +33,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     position: relative;
-    background-image: url('visao.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-image: url('visao.jpg'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
