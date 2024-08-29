@@ -7,14 +7,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você encontra um abrigo seguro e continua sua jornada. No entanto, você sente que está sendo observado."
                 ],
-                proxima: 1, // Vai para o enunciado da caverna.
+                proxima: 1,
             },
             {
                 texto: "Continua andando.",
                 afirmacao: [
                     "Você se sente cada vez mais perdido na floresta. O medo aumenta e você ouve ruídos estranhos."
                 ],
-                proxima: 2, // Vai para o enunciado da caverna.
+                proxima: 1,
             },
         ]
     },
@@ -26,14 +26,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você continua se perdendo na floresta e encontra um campo de flores. O que faz?"
                 ],
-                proxima: 3, // Vai para o enunciado do campo de flores.
+                proxima: 3,
             },
             {
-                texto: "Entra na caverna.",
+                texto: "Entra na caverna",
                 afirmacao: [
                     "Você se aproxima do canto escuro e encontra uma figura sombria. Você decide se esconder."
                 ],
-                proxima: 4, // Vai para o enunciado dentro da caverna.
+                proxima: 2,
             },
         ]
     },
@@ -45,14 +45,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você se aproxima do canto escuro e encontra uma figura sombria. Você decide se esconder."
                 ],
-                proxima: 5, // Vai para um desfecho dentro da caverna.
+                proxima: 4,
             },
             {
                 texto: "Sai da caverna.",
                 afirmacao: [
                     "Você rapidamente sai da caverna e continua explorando. Encontra uma clareira. O que faz?"
                 ],
-                proxima: 6, // Vai para o enunciado da clareira.
+                proxima: 5,
             },
         ]
     },
@@ -64,14 +64,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você segue ao longo do rio e encontra uma ponte. O que faz?"
                 ],
-                proxima: 7, // Vai para o enunciado da ponte.
+                proxima: 6,
             },
             {
                 texto: "Tenta atravessar o rio.",
                 afirmacao: [
                     "Você tenta atravessar o rio, mas a correnteza é forte e você se afasta. Você volta para a margem ou procura outro caminho?"
                 ],
-                proxima: 8, // Vai para o enunciado da margem do rio.
+                proxima: 7,
             },
         ]
     },
@@ -83,14 +83,14 @@ export const perguntas = [
                 afirmacao: [
                     "Dentro da cabana, você encontra uma passagem secreta que leva a uma nova área da floresta. O que faz?"
                 ],
-                proxima: 9, // Vai para o enunciado da cabana.
+                proxima: 8,
             },
             {
                 texto: "Ignora a cabana.",
                 afirmacao: [
                     "Você continua explorando a clareira e encontra um grupo de árvores. O que faz?"
                 ],
-                proxima: 10, // Vai para o enunciado das árvores.
+                proxima: 9,
             },
         ]
     },
@@ -102,14 +102,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você atravessa a ponte e finalmente volta para casa!"
                 ],
-                proxima: 11, // Vai para o desfecho da ponte.
+                proxima: 10,
             },
             {
                 texto: "Volta para a floresta.",
                 afirmacao: [
                     "Você se perde novamente na floresta."
                 ],
-                proxima: 1, // Volta para o início na floresta.
+                proxima: 1,
             },
         ]
     },
@@ -121,14 +121,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você volta para a margem e encontra uma trilha escondida entre as árvores. O que faz?"
                 ],
-                proxima: 12, // Vai para o enunciado da trilha.
+                proxima: 8,
             },
             {
                 texto: "Segue o curso do rio.",
                 afirmacao: [
                     "Você decide seguir o curso do rio e encontra uma cachoeira. O que faz?"
                 ],
-                proxima: 13, // Vai para o enunciado da cachoeira.
+                proxima: 9,
             },
         ]
     },
@@ -140,14 +140,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você segue pela trilha e encontra um velho abrigo. O que faz?"
                 ],
-                proxima: 14, // Vai para o enunciado do abrigo.
+                proxima: 11,
             },
             {
                 texto: "Ignora a trilha.",
                 afirmacao: [
                     "Você decide continuar explorando e encontra um campo de flores. O que faz?"
                 ],
-                proxima: 3, // Volta para o enunciado do campo de flores.
+                proxima: 3,
             },
         ]
     },
@@ -159,14 +159,14 @@ export const perguntas = [
                 afirmacao: [
                     "Você volta para a margem do rio e encontra uma trilha para a floresta. O que faz?"
                 ],
-                proxima: 12, // Vai para o enunciado da trilha.
+                proxima: 8,
             },
             {
                 texto: "Você explora a área ao redor da cachoeira e encontra uma passagem subterrânea. O que faz?",
                 afirmacao: [
                     "STATUS: Vivo"
                 ],
-                proxima: 15, // Vai para um desfecho.
+                proxima: 12,
             },
         ]
     },
